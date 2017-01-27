@@ -9,7 +9,7 @@ class LinkedList {
     }
 
     append(data) {
-      var newNode = new Node(data);
+      var node = new Node(data);
       if(this.isEmpty) {
       	this._head = newNode;
       	this._tail = newNode;
@@ -43,11 +43,11 @@ class LinkedList {
     }
 
     insertAt(index, data) {
-      var newNode = new Node(data);
-      var current = this.find(index);
-      newNode.next = current.next;
-      newNode.prev = current;
-      current.next = newNode;
+       var node = new Node(data);
+       if(this.nodes[index-1])this.nodes[index-1].appendChild(node);
+       this.nodes.splice(index,0,node);
+       this.length++;
+       return this;
     }
 
     isEmpty() {
@@ -83,8 +83,8 @@ class LinkedList {
       while (!(currNode.previous == null)) {
       print(currNode.element);
       currNode = currNode.previous;
-    }
-}
+      }
+     }
 
     indexOf(data) {
       var currentnode = this._head;
@@ -98,6 +98,6 @@ class LinkedList {
         return -1;
        }
      }
-}
+   }
 
 module.exports = LinkedList;
